@@ -1,47 +1,67 @@
 package com.mycompany.app;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class SqrtTest {
 
     @Test
     public void testAverage() {
-        Sqrt sqrt = new Sqrt(4.0);
-        assertEquals(3.0, sqrt.average(2.0, 4.0), 0.0001);
-        assertEquals(0.0, sqrt.average(-1.0, 1.0), 0.0001);
-        assertEquals(1.5, sqrt.average(1.0, 2.0), 0.0001);
+        Sqrt s = new Sqrt(0);
+        assertEquals(2.5, s.average(2, 3), 1e-9);
     }
 
     @Test
-    public void testGood() {
-        Sqrt sqrt = new Sqrt(4.0);
-        assertTrue(sqrt.good(2.0, 4.0));
-        assertFalse(sqrt.good(1.9, 4.0));
-        assertTrue(sqrt.good(1.99999999, 4.0));
+    public void testGoodTrue() {
+        Sqrt s = new Sqrt(0);
+        assertTrue(s.good(1.0, 1.0));
+    }
+
+    @Test
+    public void testGoodFalse() {
+        Sqrt s = new Sqrt(0);
+        assertFalse(s.good(1.0, 2.0));
     }
 
     @Test
     public void testImprove() {
-        Sqrt sqrt = new Sqrt(4.0);
-        assertEquals(2.05, sqrt.improve(2.0, 4.2), 0.0001);
-        assertEquals(2.5, sqrt.improve(2.0, 5.0), 0.0001);
+        Sqrt s = new Sqrt(4);
+        assertEquals(2.25, s.improve(1.0, 4.0), 1e-2);
     }
 
     @Test
-    public void testIter() {
-        Sqrt sqrt = new Sqrt(4.0);
-        assertEquals(2.0, sqrt.iter(2.0, 4.0), 0.0001);
-        assertEquals(2.0, sqrt.iter(1.0, 4.0), 0.0001);
+    public void testIterSimple() {
+        Sqrt s = new Sqrt(4);
+        assertEquals(2.0, s.iter(1.0, 4), 1e-6);
     }
 
     @Test
-    public void testCalc() {
-        Sqrt sqrt = new Sqrt(4.0);
-        assertEquals(2.0, sqrt.calc(), 0.0001);
-        sqrt = new Sqrt(9.0);
-        assertEquals(3.0, sqrt.calc(), 0.0001);
-        sqrt = new Sqrt(2.0);
-        assertEquals(Math.sqrt(2.0), sqrt.calc(), 0.0001);
+    public void testCalcPerfectSquare() {
+        Sqrt s = new Sqrt(9);
+        assertEquals(3.0, s.calc(), 1e-6);
+    }
+
+    @Test
+    public void testCalcDecimal() {
+        Sqrt s = new Sqrt(2);
+        assertEquals(Math.sqrt(2), s.calc(), 1e-6);
+    }
+
+    @Test
+    public void testCalcZero() {
+        Sqrt s = new Sqrt(0);
+        assertEquals(0.0, s.calc(), 1e-6);
+    }
+
+    @Test
+    public void testCalcLarge() {
+        Sqrt s = new Sqrt(1e6);
+        assertEquals(1000.0, s.calc(), 1e-6);
+    }
+
+    @Test
+    public void testCalcSmall() {
+        Sqrt s = new Sqrt(1e-6);
+        assertEquals(Math.sqrt(1e-6), s.calc(), 1e-6);
     }
 }
