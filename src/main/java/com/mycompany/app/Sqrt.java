@@ -28,6 +28,7 @@ public class Sqrt {
     }
 
     public double calc() {
+        if (arg == 0.0) return 0.0;
         return iter(1.0, arg);
     }
 }
