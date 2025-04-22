@@ -26,7 +26,7 @@ public class SqrtTest {
     @Test
     public void testImprove() {
         Sqrt s = new Sqrt(4);
-        assertEquals(2.25, s.improve(1.0, 4.0), 1e-2);
+        assertEquals(2.5, s.improve(1.0, 4.0), 1e-2);
     }
 
     @Test
